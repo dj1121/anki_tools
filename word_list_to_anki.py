@@ -35,7 +35,7 @@ def speech_synthesis_to_mp3_file(sentence, out_name, lang):
     speech_config = speechsdk.SpeechConfig(subscription=SPEECH_KEY, region=SERVICE_REGION)
     speech_config.set_speech_synthesis_output_format(speechsdk.SpeechSynthesisOutputFormat.Audio16Khz32KBitRateMonoMp3)
     speech_config.speech_synthesis_voice_name = lang
-    file_config = speechsdk.audio.AudioOutputConfig(filename = out_name + ".mp3")
+    file_config = speechsdk.audio.AudioOutputConfig(filename = out_name)
     speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=file_config)
 
 
@@ -87,7 +87,7 @@ def parse_txt_file(input_file, lang, output_dir):
         notes = s[1]
 
         # First get audio (throttle it)
-        out_name = datetime.now().strftime("%d%m%Y%H:%M:%S").replace(":","") + "_" + lang + "_" + str(index)
+        out_name = datetime.now().strftime("%d%m%Y%H:%M:%S").replace(":","") + "_" + lang + "_" + str(index) + ".mp3"
         sentence_clean = sentence.replace("[", "").replace("]", "")
 
         if index + 1 % 20 == 0:
